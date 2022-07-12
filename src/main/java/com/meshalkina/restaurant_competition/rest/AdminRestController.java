@@ -10,23 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/users")
-public class UserRestController {
+@RequestMapping("/api/admin/users")
+public class AdminRestController {
 
     private final UserService userService;
 
-    public UserRestController(UserService userService) {
-        this.userService = userService;
-    }
+    public AdminRestController(UserService userService) {this.userService = userService;}
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        System.out.println(user);
         User newUser = userService.createUser(user);
+        System.out.println(newUser);
         if(newUser==null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
-
-
 }
