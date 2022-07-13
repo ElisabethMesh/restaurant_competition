@@ -43,7 +43,7 @@ public class AdminRestController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('users:write')")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable long id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         User user = userService.getByIdUser(id);
         if (user != null) {
             UserDTO userDTO = UserDTO.fromUser(user);
@@ -66,7 +66,7 @@ public class AdminRestController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('users:write')")
-    public void deleteUser(@PathVariable long id) {
+    public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
 }
