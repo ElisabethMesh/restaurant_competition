@@ -23,9 +23,7 @@ public class AdminRestController {
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
-        System.out.println(user);
         User newUser = userService.createUser(user);
-        System.out.println(newUser);
         if (newUser == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
