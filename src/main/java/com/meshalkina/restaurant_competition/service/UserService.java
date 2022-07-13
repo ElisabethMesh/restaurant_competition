@@ -63,11 +63,11 @@ public class UserService {
             String encodedPassword = new BCryptPasswordEncoder(12).encode(user.getPassword());
             user.setPassword(encodedPassword);
         }
-        if (user.getLastname() == null) {
-            user.setLastname(fromDB.getLastname());
-        }
         if (user.getFirstname() == null) {
             user.setFirstname(fromDB.getFirstname());
+        }
+        if (user.getLastname() == null) {
+            user.setLastname(fromDB.getLastname());
         }
         if (currentUser.getRole() == Role.USER) {
             if (fromDB.getStatus() != user.getStatus()) {
@@ -77,7 +77,6 @@ public class UserService {
         if (user.getStatus() == null) {
             user.setStatus(fromDB.getStatus());
         }
-
         if (currentUser.getRole() == Role.USER) {
             if (fromDB.getRole() != user.getRole()) {
                 user.setRole(currentUser.getRole());
@@ -86,6 +85,8 @@ public class UserService {
         if (user.getRole() == null) {
             user.setRole(fromDB.getRole());
         }
+        user.setCreated(fromDB.getCreated());
+        user.setUpdated(LocalDateTime.now());
 
         return userRepository.save(user);
     }

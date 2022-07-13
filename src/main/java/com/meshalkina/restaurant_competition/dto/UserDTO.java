@@ -3,11 +3,10 @@ package com.meshalkina.restaurant_competition.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.meshalkina.restaurant_competition.model.Role;
 import com.meshalkina.restaurant_competition.model.User;
+import com.meshalkina.restaurant_competition.util.DateTimeFormatterUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -19,8 +18,8 @@ public class UserDTO {
     private String firstname;
     private String lastname;
     private Role role;
-    private LocalDateTime created;
-    private LocalDateTime updated;
+    private String created;
+    private String updated;
 
 
     public static UserDTO fromUser(User user) {
@@ -30,8 +29,8 @@ public class UserDTO {
         userDTO.setFirstname(user.getFirstname());
         userDTO.setLastname(user.getLastname());
         userDTO.setRole(user.getRole());
-        userDTO.setCreated(user.getCreated());
-        userDTO.setUpdated(user.getUpdated());
+        userDTO.setCreated(DateTimeFormatterUtil.format(user.getCreated()));
+        userDTO.setUpdated(DateTimeFormatterUtil.format(user.getUpdated()));
 
         return userDTO;
     }
@@ -68,19 +67,17 @@ public class UserDTO {
         this.role = role;
     }
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
+    public void setCreated(String created) { this.created = created; }
 
-    public LocalDateTime getUpdated() {
+    public String getUpdated() {
         return updated;
     }
 
-    public void setUpdated(LocalDateTime updated) {
+    public void setUpdated(String updated) {
         this.updated = updated;
     }
 }
