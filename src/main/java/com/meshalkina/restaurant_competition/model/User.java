@@ -1,6 +1,7 @@
 package com.meshalkina.restaurant_competition.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,9 @@ public class User extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
+
+    @JsonManagedReference(value = "user-vote")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Vote vote;
 
 }

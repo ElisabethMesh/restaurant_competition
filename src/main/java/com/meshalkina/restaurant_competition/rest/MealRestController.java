@@ -30,7 +30,7 @@ public class MealRestController {
     }
 
     @GetMapping("/{meal_id}")
-    @PreAuthorize("hasAuthority('users:write')")
+    @PreAuthorize("hasAuthority('users:read')")
     public ResponseEntity<MealDTO> getMealById(@PathVariable Long meal_id) {
         Meal meal = mealService.getByIdMeal(meal_id);
         if (meal != null) {

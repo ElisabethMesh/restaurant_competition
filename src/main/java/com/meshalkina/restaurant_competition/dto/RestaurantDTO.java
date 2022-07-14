@@ -14,6 +14,7 @@ public class RestaurantDTO {
     private Long id;
     private String name;
     private List<MealDTO> menu;
+    private int rating;
 
     public static RestaurantDTO fromRestaurant(Restaurant restaurant) {
         RestaurantDTO restaurantDTO = new RestaurantDTO();
@@ -26,6 +27,12 @@ public class RestaurantDTO {
                 .collect(Collectors.toList());
 
         restaurantDTO.setMenu(menuDTO);
+
+        if(restaurant.getVotes() != null) {
+            restaurantDTO.setRating(restaurant.getVotes().size());
+        } else {
+            restaurantDTO.setRating(0);
+        }
 
         return restaurantDTO;
     }

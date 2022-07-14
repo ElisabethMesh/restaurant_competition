@@ -18,7 +18,7 @@ public class Meal extends BaseEntity {
     @Column(name = "price")
     private double price;
 
-    @JsonBackReference
+    @JsonBackReference(value = "menu-restaurant")
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
