@@ -1,13 +1,14 @@
 package com.meshalkina.restaurant_competition.service;
 
 import com.meshalkina.restaurant_competition.model.Restaurant;
-import com.meshalkina.restaurant_competition.model.User;
 import com.meshalkina.restaurant_competition.repository.RestaurantRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Slf4j
 @Service
 public class RestaurantService {
 
@@ -23,15 +24,23 @@ public class RestaurantService {
         restaurant.setUpdated(dateTime);
 
         Restaurant newRestaurant = restaurantRepository.save(restaurant);
+
+        log.info("IN createRestaurant - created new restaurant with name {}", newRestaurant.getName());
         return newRestaurant;
     }
 
     public List<Restaurant> getAllRestaurants() {
-        return restaurantRepository.findAll();
+        List<Restaurant> result = restaurantRepository.findAll();
+
+        log.info("IN getAllRestaurants - {} restaurants found", result.size());
+        return result;
     }
 
     public Restaurant getByIdRestaurant(Long restaurant_id) {
-        return restaurantRepository.findById(restaurant_id).orElse(null);
+        Restaurant restaurant = restaurantRepository.findById(restaurant_id).orElse(null);
+
+        log.info("IN getByIdRestaurant - found restaurant with id {} and name {}", restaurant_id, restaurant.getName());
+        return restaurant;
     }
 
     public Restaurant updateRestaurant(Restaurant restaurant) {
@@ -40,10 +49,12 @@ public class RestaurantService {
         restaurant.setCreated(fromDB.getCreated());
         restaurant.setUpdated(LocalDateTime.now());
 
+        log.info("IN updateRestaurant - the restaurant with id {} has been changed", restaurant.getId());
         return restaurantRepository.save(restaurant);
     }
 
     public void deleteRestaurant(Long restaurant_id) {
         restaurantRepository.deleteById(restaurant_id);
+        log.info("IN deleteRestaurant - the restaurant with id {} has been deleted", restaurant_id);
     }
 }
