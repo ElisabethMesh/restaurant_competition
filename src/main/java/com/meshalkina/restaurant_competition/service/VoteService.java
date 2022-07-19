@@ -1,9 +1,10 @@
 package com.meshalkina.restaurant_competition.service;
 
-import com.meshalkina.restaurant_competition.model.*;
-import com.meshalkina.restaurant_competition.repository.MealRepository;
+import com.meshalkina.restaurant_competition.model.Restaurant;
+import com.meshalkina.restaurant_competition.model.Role;
+import com.meshalkina.restaurant_competition.model.User;
+import com.meshalkina.restaurant_competition.model.Vote;
 import com.meshalkina.restaurant_competition.repository.RestaurantRepository;
-import com.meshalkina.restaurant_competition.repository.UserRepository;
 import com.meshalkina.restaurant_competition.repository.VoteRepository;
 import com.meshalkina.restaurant_competition.util.TimeUtil;
 import com.meshalkina.restaurant_competition.util.UserUtil;

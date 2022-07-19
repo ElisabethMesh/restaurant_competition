@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -39,4 +40,15 @@ public class User extends BaseEntity {
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Vote vote;
 
+    //for the test
+    public User(Long id, LocalDateTime created, LocalDateTime updated, String username, String password,
+                String firstname, String lastname, Role role, Status status) {
+        super(id, created, updated);
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.role = role;
+        this.status = status;
+    }
 }

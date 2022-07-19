@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -22,4 +23,12 @@ public class Meal extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
+
+    //for the test
+
+    public Meal(Long id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 }
