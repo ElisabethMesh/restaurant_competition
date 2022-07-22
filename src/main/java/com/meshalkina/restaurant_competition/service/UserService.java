@@ -6,14 +6,14 @@ import com.meshalkina.restaurant_competition.model.Status;
 import com.meshalkina.restaurant_competition.model.User;
 import com.meshalkina.restaurant_competition.repository.UserRepository;
 import com.meshalkina.restaurant_competition.util.UserUtil;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Slf4j
+
 @Service
 public class UserService {
 
@@ -33,24 +33,15 @@ public class UserService {
         user.setCreated(dateTime);
         user.setUpdated(dateTime);
 
-        User newUser = userRepository.save(user);
-
-        log.info("IN createUser - created new user with username {}", newUser.getUsername());
-        return newUser;
+        return userRepository.save(user);
     }
 
     public List<User> getAllUsers() {
-        List<User> result = userRepository.findAll();
-
-        log.info("IN getAllUsers - {} users found", result.size());
-        return result;
+        return userRepository.findAll();
     }
 
     public User getByIdUser(Long user_id) {
-        User user = userRepository.findById(user_id).orElse(null);
-
-        log.info("IN getByIdUser - found user with id {} and username {}", user_id, user.getUsername());
-        return user;
+        return userRepository.findById(user_id).orElse(null);
     }
 
     public User getByUsername(String username) {
@@ -95,12 +86,10 @@ public class UserService {
         user.setCreated(fromDB.getCreated());
         user.setUpdated(LocalDateTime.now());
 
-        log.info("IN updateUser - the user with id {} has been changed", user.getId());
         return userRepository.save(user);
     }
 
     public void deleteUser(Long user_id) {
-        userRepository.deleteById(user_id);
-        log.info("IN deleteUser - the user with id {} has been deleted", user_id);
+            userRepository.deleteById(user_id);
     }
 }
