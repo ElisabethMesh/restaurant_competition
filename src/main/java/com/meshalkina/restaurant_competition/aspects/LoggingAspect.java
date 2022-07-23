@@ -59,6 +59,16 @@ public class LoggingAspect {
         }
     }
 
+    @AfterReturning("com.meshalkina.restaurant_competition.aspects.MyPointcuts.getUserMethodFromUserRestController()")
+    public void afterReturningGetUserLoggingAdvice(JoinPoint joinPoint) throws Throwable {
+        try {
+            log.info("IN {}: object of the User class was found", joinPoint.getSignature().getName());
+        } catch (Exception e) {
+            log.error("IN {}: Exception raised {}", joinPoint.getSignature().getName(), e.getClass().getSimpleName());
+            throw e;
+        }
+    }
+
     @AfterReturning(value = "com.meshalkina.restaurant_competition.aspects.MyPointcuts.allUpdateMethodsFromService()",
             returning = "retVal")
     public void afterReturningUpdateLoggingAdvice(JoinPoint joinPoint, Object retVal) throws Throwable {

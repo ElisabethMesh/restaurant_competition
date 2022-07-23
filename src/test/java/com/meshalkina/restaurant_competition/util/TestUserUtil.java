@@ -23,8 +23,11 @@ public class TestUserUtil {
             (4L, LocalDateTime.now(), LocalDateTime.now(), "alisa", "alisa", "Alisa",
                     "Somova", Role.USER, Status.ACTIVE);
     public static final User userForUpdate = new User
-            (2L, LocalDateTime.now(), LocalDateTime.now(), "igor", "igor", "Igoreshka",
-                    "Meshalkin", Role.ADMIN, Status.ACTIVE);
+            (2L, LocalDateTime.of(2022, 07, 18, 21, 00), LocalDateTime.now(), "igor",
+                    "igor", "Igoreshka", "Meshalkin", Role.ADMIN, Status.ACTIVE);
+    public static final User userForCreateWithDuplicateUsername = new User
+            (5L, LocalDateTime.now(), LocalDateTime.now(), "lisa", "lisa", "Lisa",
+                    "Rachenko", Role.USER, Status.ACTIVE);
 
     public static List<UserDTO> getAllUsers() {
         List<UserDTO> userDTOList = new ArrayList<>();

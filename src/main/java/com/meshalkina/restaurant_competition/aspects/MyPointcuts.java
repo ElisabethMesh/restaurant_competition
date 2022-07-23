@@ -15,6 +15,10 @@ public class MyPointcuts {
     public void allGetByIdMethodsFromService() {
     }
 
+    @Pointcut("execution(* com.meshalkina.restaurant_competition.rest.UserRestController.getUser())")
+    public void getUserMethodFromUserRestController() {
+    }
+
     @Pointcut("execution(* com.meshalkina.restaurant_competition.service.*Service.update*(*))")
     public void allUpdateMethodsFromService() {
     }
