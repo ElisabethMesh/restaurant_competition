@@ -3,6 +3,8 @@ package com.meshalkina.restaurant_competition.rest;
 import com.meshalkina.restaurant_competition.dto.RestaurantDTO;
 import com.meshalkina.restaurant_competition.model.Restaurant;
 import com.meshalkina.restaurant_competition.service.RestaurantService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/restaurants")
+@Api("Controller for restaurants")
 public class RestaurantRestController {
 
     private final RestaurantService restaurantService;
@@ -21,6 +24,7 @@ public class RestaurantRestController {
         this.restaurantService = restaurantService;
     }
 
+    @ApiOperation("Create new restaurant")
     @PostMapping
     @PreAuthorize("hasAuthority('users:write')")
     public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) {
@@ -31,6 +35,7 @@ public class RestaurantRestController {
         return new ResponseEntity<>(newRestaurant, HttpStatus.OK);
     }
 
+    @ApiOperation("Get all restaurants")
     @GetMapping()
     @PreAuthorize("hasAuthority('users:read')")
     public ResponseEntity<List<RestaurantDTO>> getAllRestaurants() {
@@ -41,6 +46,7 @@ public class RestaurantRestController {
         return new ResponseEntity<>(allRestaurantsDTO, HttpStatus.OK);
     }
 
+    @ApiOperation("Get a restaurant by id")
     @GetMapping("/{restaurant_id}")
     @PreAuthorize("hasAuthority('users:read')")
     public ResponseEntity<RestaurantDTO> getRestaurantById(@PathVariable Long restaurant_id) {
@@ -52,6 +58,7 @@ public class RestaurantRestController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @ApiOperation("Update the restaurant")
     @PutMapping
     @PreAuthorize("hasAuthority('users:write')")
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant) {
@@ -62,6 +69,7 @@ public class RestaurantRestController {
         return new ResponseEntity<>(updateRestaurant, HttpStatus.OK);
     }
 
+    @ApiOperation("Delete the restaurant")
     @DeleteMapping("/{restaurant_id}")
     @PreAuthorize("hasAuthority('users:write')")
     public void deleteRestaurant(@PathVariable Long restaurant_id) {
